@@ -2,10 +2,10 @@ import functions as func
 
 def main():
 
-    texto = "MJCHEFPTUDRSOZQYNWBAXVKILG"
-    saltos = "35"
-    clave = "35768942"
-    claveordenada = "23456789"
+    texto = "RQPOÑNMLKJIHGFEDCBAZYXWVUTS"
+    clave = "462873"
+    claveordenada = "876432"
+    saltos = "695472"
     patron = "IDI"
 
     # print("INVERTIR TEXTO")

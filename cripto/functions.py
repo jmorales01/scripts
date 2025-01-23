@@ -1,13 +1,11 @@
-
+# texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
 def invertir_texto(texto):
     return texto[::-1]
 
-# Ejemplo de uso
+
+
 # texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-# invertido = invertir_texto(texto)
-
-
-
+# letra_inicio = "R"
 def reorganizar_texto_por_letra(texto, letra_inicio):
    
     letras = list(texto)
@@ -20,13 +18,11 @@ def reorganizar_texto_por_letra(texto, letra_inicio):
     resultado = ''.join(letras_reorganizadas)
     return resultado
 
-# Ejemplo de uso
+
+
 # texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-# letra_inicio = "R"
-# reorganizado = reorganizar_texto_por_letra(texto, letra_inicio)
-
-
-
+# desplazamiento = 35
+# is_spaces = [False,True]  # False: no hay espacios en el texto, True: hay espacios en el texto
 def julio_cesar(texto, desplazamientos, is_spaces=False):
     letras = list(texto)
     dplz = list(map(int, desplazamientos))
@@ -55,52 +51,35 @@ def julio_cesar(texto, desplazamientos, is_spaces=False):
 
     return ''.join(resultado)
 
-# Ejemplo de uso
-# texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-# desplazamiento = 35
-# cifrado = julio_cesar(texto, desplazamiento)
 
 
-
+# texto = "MJCHEFPTUDRSOZQYNWBAXVKILG"
+# clave = "35768942"
+# claveordenada = "23456789234567892345678935"
 def trasposicion(texto, clave, claveordenada):
 
-    letras = list(texto)
-    claveO = list(map(int, clave))
-    claveorarray = list(map(int, claveordenada))
+    columnas = len(clave)
+    filas = [texto[i:i + columnas] for i in range(0, len(texto), columnas)]
 
-    fila_letras = []
-    fila_clave = []
-    for i, letra in enumerate(letras):
-        fila_letras.append(letra) 
-        fila_clave.append(claveO[i % len(claveO)])  
-
-    matriz = [fila_letras, fila_clave]
-   
-    longitud_clave = len(claveO)
+    # Crear la matriz
+    matriz = []
+    for fila in filas:
+        objetos = [{"claveordenada": claveordenada[i], "texto": fila[i]} for i in range(len(fila))]
+        matriz.append(objetos)
+    
     resultado = []
+    for fila in matriz:
+        fila_ordenada = sorted(fila, key=lambda x: int(x["claveordenada"]))
+        resultado.append("".join(obj["texto"] for obj in fila_ordenada))
+    
+    texto_cifrado = "".join(resultado)
+    return texto_cifrado.strip()
 
-    for i in range(0, len(fila_letras), longitud_clave):
-  
-        temp_letras = fila_letras[i:i + longitud_clave]
-        temp_clave = fila_clave[i:i + longitud_clave]
-        temp_claveor = claveorarray
- 
-        emparejados = list(zip(temp_claveor, temp_letras ))
-        mapa_reemplazo = dict(emparejados)
-        temp_clave_reemplazado = [mapa_reemplazo[num] for num in temp_clave]
 
-        resultado.extend(temp_clave_reemplazado)
 
-    return resultado
-
-# Ejemplo de uso
 # texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
 # clave = "8256"
-# claveordenada = "2658"
-# trasposicion = trasposicion(texto, clave, claveordenada)
-
-
-
+# claveordenada = "82645"
 def trama(texto, clave, claveordenada):
 
     longitud_clave = len(clave)
@@ -117,14 +96,11 @@ def trama(texto, clave, claveordenada):
     resultado = resultado + texto[-resto:]
     return resultado
 
-# Ejemplo de uso
-# texto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
-# clave = "8256"
-# claveordenada = "82645"
-# trama = trama(texto, clave, claveordenada)
 
 
-
+# texto = "RQPOÑNMLKJIHGFEDCBAZYXWVUTS"
+# clave = "695472"
+# patron = "IDI"
 def IDI(texto, clave, patron):
  
     clave = list(map(int, clave))
@@ -162,12 +138,6 @@ def IDI(texto, clave, patron):
         posiciones_usadas.add(posicion_actual)
         nuevo_texto += diccionario[posicion_actual][0] 
     return  nuevo_texto
-
-# Ejemplo de uso
-# texto = "RQPOÑNMLKJIHGFEDCBAZYXWVUTS"
-# clave = "695472"
-# patron = "IDI"
-# IDI = IDI(texto, clave, patron)
 
 
 
